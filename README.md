@@ -1,87 +1,117 @@
-<p align="center">
-  <a href="https://github.com/lucide-icons/lucide">
-    <img src="https://lucide.dev/package-logos/lucide-react.svg" alt="Lucide icon library for React applications." width="540">
-  </a>
-</p>
+# KAALAMITHRA Website (Next.js) — Project README
 
-<p align="center">
-Lucide icon library for React applications.
-</p>
+## Overview
+This repository contains the KAALAMITHRA marketing website built with **Next.js (App Router)** and styled using **Tailwind CSS**. The site includes multi-page marketing content (Home, About, Services, Industries, Testimonials, FAQ, Blog, Contact, Case Studies), a persistent header/footer layout, a mobile bottom navigation bar, a chatbot UI, and PWA support.
 
-<div align="center">
+## Tech Stack
+- **Next.js 16.2.6** (App Router)
+- **React 19**
+- **TypeScript**
+- **Tailwind CSS**
+- **next-themes** (theme handling)
+- **next-pwa** (PWA service worker)
+- **@vercel/analytics** (prod analytics)
+- **lucide-react** (icons)
 
-  [![npm](https://img.shields.io/npm/v/lucide-react?color=blue)](https://www.npmjs.com/package/lucide-react)
-  ![NPM Downloads](https://img.shields.io/npm/dw/lucide-react)
-  [![License](https://img.shields.io/badge/license-ISC-green)](https://lucide.dev/license)
-</div>
+## Key Pages / Routes (App Router)
+- `app/page.tsx` — Home / landing page
+- `app/about/page.tsx` — About page (mission, vision, values, process)
+- `app/services/page.tsx` — Services overview
+- `app/services/[slug]/page.tsx` — Service detail by slug
+- `app/industries/page.tsx` — Industries overview
+- `app/industries/[slug]/page.tsx` — Industry detail by slug
+- `app/testimonials/page.tsx` — Testimonials / success stories
+- `app/faq/page.tsx` — FAQ
+- `app/contact/page.tsx` — Contact + contact form
+- `app/blog/page.tsx` — Blog listing
+- `app/case-studies/page.tsx` — Case studies listing
+- `app/consultation/page.tsx` — Consultation page
 
-<p align="center">
-  <a href="https://lucide.dev/guide/">About</a>
-  ·
-  <a href="https://lucide.dev/icons/">Icons</a>
-  ·
-  <a href="https://lucide.dev/guide/react">Documentation</a>
-  ·
-  <a href="https://lucide.dev/license">License</a>
-</p>
+## Layout and Global Components
+- `app/layout.tsx`
+  - Loads global CSS (`globals.css`, `theme.css`)
+  - Wraps content with `ThemeProvider`
+  - Renders:
+    - `components/backgroundGrid.tsx` (fixed background grid)
+    - `components/header.tsx`
+    - `Footer`
+    - `components/bottomNav.tsx` (mobile bottom bar)
+    - PWA install prompt (`components/pwaInstallPrompt.tsx`)
+    - Chatbot UI (`components/chatBot.tsx`)
+- `components/header.tsx` — site navigation + dropdowns
+- `components/footer.tsx` — footer links + socials
 
-# Lucide React
+## Chatbot / API
+### Backend
+- `app/api/chat/route.ts`
+  - Implements a `POST` endpoint that sends messages to **Groq Chat Completions**.
+  - Uses a strict `SYSTEM_PROMPT` containing KAALAMITHRA company/service info.
+  - Requires environment variable:
+    - `GROQ_API_KEY`
+  - If `GROQ_API_KEY` is missing, it returns a helpful response pointing users to direct contact.
 
-Implementation of the Lucide icon library for React applications.
+### Frontend
+- `components/chatBot.tsx` — chatbot widget UI
 
-## Installation
+## PWA Support
+- `next.config.mjs` configures `@ducanh2912/next-pwa`
+  - `dest: 'public'`
+  - `register: true`
+  - `skipWaiting: true`
+  - Disabled in development (`disable: process.env.NODE_ENV === 'development'`)
 
-```sh
-pnpm add lucide-react
+- `public/manifest.json` — web app manifest
+- `public/sw.js` and `public/workbox-*.js` — service worker assets
+- `components/pwaInstallPrompt.tsx` — prompt shown to install the PWA
+
+## Styling
+- `app/globals.css` and `app/theme.css` define base styling.
+- Pages use Tailwind utility classes heavily.
+
+## Development / Setup
+### Prerequisites
+- Node.js
+- pnpm (this repo uses pnpm via `pnpm-lock.yaml`)
+
+### Install
+```bash
+pnpm install
 ```
 
-```sh
-npm install lucide-react
+### Run in dev
+```bash
+pnpm dev
 ```
 
-```sh
-yarn add lucide-react
+### Build
+```bash
+pnpm build
 ```
 
-```sh
-bun add lucide-react
+### Lint
+```bash
+pnpm lint
 ```
 
-## Documentation
+## Environment Variables
+- `GROQ_API_KEY` — required for chatbot responses from Groq.
 
-For full documentation, visit [lucide.dev](https://lucide.dev/guide/packages/lucide-react)
+## Deployment
+- Uses Next.js standard deployment workflow.
+- Analytics via `@vercel/analytics/next` only runs in production.
 
-## Community
+## Repository Notes
+- TypeScript build errors are currently ignored during build (`typescript.ignoreBuildErrors: true`) in `next.config.mjs`.
 
-Join the [Discord server](https://discord.gg/EH6nSts) to chat with the maintainers and other users.
+## Project Structure (high level)
+```text
+app/                        # Next.js app router pages + API routes
+components/                 # reusable UI components
+lib/                        # helpers
+public/                     # static assets (images, manifest, service worker files)
+```
 
-## License
+## Reference Summary Files
+- `DESIGN_UPDATE_SUMMARY.md` — documents design/theme changes
+- `IMPLEMENTATION_SUMMARY.md` — documents implemented page features/content
 
-Lucide is licensed under the ISC license. See [LICENSE](https://lucide.dev/license).
-
-[//]: <> (Sponsors)
-
-## Sponsors
-
-<a href="https://vercel.com?utm_source=lucide&utm_campaign=oss">
-  <img src="https://lucide.dev/vercel.svg" alt="Powered by Vercel" width="200" />
-</a>
-
-<a href="https://www.digitalocean.com/?refcode=b0877a2caebd&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge"><img src="https://lucide.dev/digitalocean.svg" width="200" alt="DigitalOcean Referral Badge" /></a>
-
-### Hero backers 🦸
-
-<a href="https://zephyr-cloud.io/"><img src="https://lucide.dev/sponsors/zephyr-cloud.svg" width="180" alt="Zephyr Cloud – From idea to prod: fast micro-frontend delivery!" /></a>
-
-### Awesome backers 🍺
-
-<a href="https://github.com/pdfme/pdfme"><img src="https://lucide.dev/sponsors/pdfme.svg" width="180" alt="pdfme – Open-source PDF generation library built with TypeScript and React." /></a>
-<a href="https://www.paxhistoria.co/"><img src="https://lucide.dev/sponsors/paxhistoria.svg?" width="180" alt="Pax Historia – An alternate history sandbox game" /></a>
-
-### Backers ☕
-
-<a href="https://www.fina.money/"><img src="https://lucide.dev/sponsors/fina-money.png" width="180" alt="Fina Money – Modular Finance Tracker" /></a>
-
-### Other contributors 💸
-
-You can find all our past and non-recurring financial contributors at [our Open Collective page](https://opencollective.com/lucide-icons).
