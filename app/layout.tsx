@@ -9,9 +9,7 @@ import { Footer } from '@/components/footer'
 
 // 1. Import your background grid and mobile navigation components
 import BackgroundGrid from '@/components/backgroundGrid'
-import StarsBackground from '@/components/starsBackground'
 import FloatingShapes3D from '@/components/floatingShapes3d'
-import WavyBackground from '@/components/WavyBackground'
 import BottomNav from '@/components/bottomNav'
 import ChatBot from '@/components/chatBot'
 import PwaInstallPrompt from '@/components/pwaInstallPrompt'
@@ -78,8 +76,6 @@ export default function RootLayout({
       <body className={`${poppins.variable} ${inter.variable} font-sans antialiased min-h-screen relative`}>
         {/* Canvas backgrounds at z-0 */}
         <div className="fixed inset-0 z-0 pointer-events-none">
-          <WavyBackground />
-          <StarsBackground />
           <FloatingShapes3D />
           <BackgroundGrid />
         </div>

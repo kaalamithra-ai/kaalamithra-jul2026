@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Menu, X, ArrowRight, ChevronDown } from "lucide-react"
-import HeaderWavyBg from "@/components/headerWavyBg"
 
 const services = [
   { name: "Lead Generation Engine", href: "/services/lead-generation" },
@@ -39,8 +38,6 @@ export function Header() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 dark:bg-[#0A0B1E]/80 backdrop-blur-md border-b border-border">
-      {/* Wavy animated background */}
-      <HeaderWavyBg />
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 lg:px-2 py-2 lg:py-3 relative">
         
         {/* Logo */}
